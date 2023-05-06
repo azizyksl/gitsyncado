@@ -1,0 +1,30 @@
+name: Push directory to another repository
+on: push
+jobs:
+  check-bats-version:
+    runs-on: ubuntu-latest
+    environment: AzurePAT
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run script file
+      env:
+        AZUREPAT: ${{secrets.AZUREPAT}}
+        AZUSERNAME: ${{secrets.AZUSERNAME}}
+        AZUSER_EMAIL: ${{secrets.AZUSER_EMAIL}}
+        AZORG: ${{secrets.AZORG}}
+      run: |
+        cd $GITHUB_WORKSPACE
+        rm -rf .git
+        cd ..
+        GIT_CMD_REPOSITORY="https://$AZUSERNAME:$AZUREPAT@dev.azure.com/$AZORG/Deneme-Sync/_git/Deneme-Sync"
+        mkdir azureRepo
+        cd azureRepo
+        git clone $GIT_CMD_REPOSITORY
+        cp -r $GITHUB_WORKSPACE/* Deneme-Sync/
+        cd Deneme-Sync
+        git config --global user.email "$AZUSER_EMAIL"
+        git config --global user.name "$AZUSERNAME"
+        git add .
+        git commit -m "sync from github to azure"
+        git push
+      shell: bash
