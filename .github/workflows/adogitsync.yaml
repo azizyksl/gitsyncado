@@ -20,8 +20,8 @@ jobs:
         mkdir azureRepo
         cd azureRepo
         git clone $GIT_CMD_REPOSITORY
-        cp -r $GITHUB_WORKSPACE/* Deneme-Sync/
-        cd Deneme-Sync
+        cp -r $GITHUB_WORKSPACE/* Deneme/
+        cd Deneme
         git config --global user.email "$AZUSER_EMAIL"
         git config --global user.name "$AZUSERNAME"
         git add .
