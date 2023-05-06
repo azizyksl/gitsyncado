@@ -16,7 +16,7 @@ jobs:
         cd $GITHUB_WORKSPACE
         rm -rf .git
         cd ..
-        GIT_CMD_REPOSITORY="https://$AZUSERNAME:$AZUREPAT@dev.azure.com/$AZORG/Deneme-Sync/_git/Deneme-Sync"
+        GIT_CMD_REPOSITORY="https://$AZUSERNAME:$AZUREPAT@dev.azure.com/$AZORG/Deneme/_git/Deneme"
         mkdir azureRepo
         cd azureRepo
         git clone $GIT_CMD_REPOSITORY
